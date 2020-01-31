@@ -77,6 +77,8 @@ app.get('/checkout', function (req, res) {
                 var request = new cybersourceRestApi.GeneratePublicKeyRequest();
                 request.encryptionType = 'RsaOaep256';
                 request.targetOrigin = 'https://flex-mocroform-poc.herokuapp.com';
+                //request.targetOrigin = 'http://localhost:3000';
+
 
                 var options = {
                         'generatePublicKeyRequest': request
@@ -128,33 +130,21 @@ app.post('/pay', function (req, res) {
         try {
 
                 console.log('Response : ' + req.body.flexresponse);
-                var tokenResponse = JSON.parse(req.body.flexresponse)
+                let data = req.body;
+                let flexresponse = JSON.parse(data.flexresponse)
+                let tokenizedCard = flexresponse.token;
 
-                res.render('pay', {
-                        flexresponse: req.body.flexresponse,
-                        tokenizedCard: tokenResponse.token.toLocaleString()
-                });
-
-        } catch (error) {
-                res.send('Error : ' + error + ' Error status code : ' + error.statusCode);
-        }
-
-
-});
-app.post('/confirmOrder', function (req, res) {
-        console.log('GOT HEREASD');
-        try {
-                var instance = new cybersourceRestApi.CaptureApi(configObj);
-                console.log('confirm payment and launch confirm order page')
 
                 function callback(error, data) {
                         if (error) {
                                 (res.send('Error : ' + error + ' Error status code : ' + error.statusCode))
                         } else {
-                                res.render('confirmOrder');
+                                res.render('receipt', {
+                                        data: JSON.stringify(data)
+                                });
                         }
                 };
-                processPayment(callback, true, req.body)
+                processPayment(callback, true, data , tokenizedCard)
 
         } catch (error) {
                 res.send('Error : ' + error + ' Error status code : ' + error.statusCode);
@@ -162,6 +152,26 @@ app.post('/confirmOrder', function (req, res) {
 
 
 });
+// app.post('/confirmOrder', function (req, res) {
+//         console.log('GOT HEREASD');
+//         try {
+//                 console.log('confirm payment and launch confirm order page')
+
+//                 function callback(error, data) {
+//                         if (error) {
+//                                 (res.send('Error : ' + error + ' Error status code : ' + error.statusCode))
+//                         } else {
+//                                 res.render('confirmOrder');
+//                         }
+//                 };
+//                 processPayment(callback, true, req.body)
+
+//         } catch (error) {
+//                 res.send('Error : ' + error + ' Error status code : ' + error.statusCode);
+//         }
+
+
+// });
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
         next(createError(404));
@@ -178,7 +188,7 @@ app.use(function (err, req, res, next) {
         res.render('error');
 });
 
-function processPayment(callback, enableCapture, data) {
+function processPayment(callback, enableCapture, data , tokenizedCard) {
         try {
                 console.log('here')
                 var instance = new cybersourceRestApi.PaymentsApi(configObj);
@@ -238,7 +248,7 @@ function processPayment(callback, enableCapture, data) {
                 // card.type = '001';
                 // paymentInformation.card = card;
                 var customer = new cybersourceRestApi.Ptsv2paymentsPaymentInformationCustomer()
-                customer.customerId = data.tokenizedCard;
+                customer.customerId = tokenizedCard;
                 paymentInformation.customer = customer;
                 var request = new cybersourceRestApi.CreatePaymentRequest();
                 request.clientReferenceInformation = clientReferenceInformation;
