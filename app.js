@@ -76,7 +76,7 @@ app.get('/checkout', function (req, res) {
 
                 var request = new cybersourceRestApi.GeneratePublicKeyRequest();
                 request.encryptionType = 'RsaOaep256';
-                request.targetOrigin = window.location.origin;
+                request.targetOrigin = 'flex-mocroform-poc.herokuapp.com';
 
                 var options = {
                         'generatePublicKeyRequest': request
