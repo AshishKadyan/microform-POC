@@ -1,0 +1,19 @@
+# Node Dependency directory
+node_modules
+
+# Build folder
+dist
+
+# VS Code
+settings.json
+launch.json
+yarn.lock
+
+# Webstorm
+.idea
+
+# Webpack bundle analyser
+stats.json
+
+
+
