@@ -140,7 +140,7 @@ app.post('/pay', function (req, res) {
                                 (res.send('Error : ' + error + ' Error status code : ' + error.statusCode))
                         } else {
                                 res.render('receipt', {
-                                        data: JSON.stringify(data)
+                                        data: JSON.stringify(data, undefined, 2)
                                 });
                         }
                 };
@@ -229,7 +229,7 @@ function processPayment(callback, enableCapture, data , tokenizedCard) {
                 billTo.postalCode = '94105';
                 billTo.locality = 'San Francisco';
                 billTo.administrativeArea = 'MI';
-                billTo.email = 'test@cybs.com';
+                billTo.email = 'ashish.kadyan@comprotechnologies.com';
                 billTo.address2 = 'Address 2';
                 billTo.district = 'MI';
                 billTo.buildingNumber = '123';

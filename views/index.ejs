@@ -7,7 +7,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css"
         integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
-
     <style>
         #cardNumber-container {
             height: 38px;
@@ -25,7 +24,7 @@
 <body>
     <div class="container card">
         <div class="card-body">
-            <h1>Checkout</h1>
+            <h1>Card Details</h1>
             <form action="/pay" id="my-sample-form" method="post">
                 <div class="form-group">
                     <label for="cardholderName">Name</label>
@@ -63,15 +62,16 @@
                             <option>2022</option>
                         </select>
                     </div>
-                    <div class="form-group col-md-6">
+                    <!-- <div class="form-group col-md-6">
                         <label for="cardType">Card Type</label>
                         <select id="cardType" class="form-control">
                             <option>001</option>
                             <option>002</option>
                             <option>003</option>
                         </select>
-                    </div>
+                    </div> -->
                 </div>
+                <h1>Billing Info</h1>
                 <div class="form-group">
                     <label for="amount">Amount</label>
                     <input id="amount" class="form-control" name="amount" placeholder="Enter Amount">
@@ -83,10 +83,6 @@
                 <div class="form-group">
                     <label for="lastName">Last Name</label>
                     <input id="lastName" class="form-control" name="lastName" placeholder="Enter Last Name">
-                </div>
-                <div class="form-group">
-                    <label for="securityCode">Security Code</label>
-                    <input id="securityCode" class="form-control" name="securityCode" placeholder="Enter Security Code">
                 </div>
                 <button type="button" id="pay-button" class="btn btn-primary">Pay</button>
                 <input type="hidden" id="tokenizedCard" name="tokenizedCard">
@@ -105,7 +101,13 @@
         var flexResponse = document.querySelector('#flexresponse');
         var expMonth = document.querySelector('#expMonth');
         var expYear = document.querySelector('#expYear');
-        var cardType = document.querySelector('#cardType');
+        var firstName = document.querySelector('#firstName');
+        var lastName = document.querySelector('#lastName');
+        var amount = document.querySelector('#amount');
+        amount.value=10;
+        firstName.value="John"
+        lastName.value="Doe"
+        // var cardType = document.querySelector('#cardType');
 
         var jwk = <%-keyInfo%> ;
         console.log(JSON.stringify(jwk));
@@ -154,7 +156,7 @@
                     var options = {
                         cardExpirationMonth: expMonth.value,
                         cardExpirationYear: expYear.value,
-                        cardType: cardType.value
+                        // cardType: cardType.value
                     };
 
                     microformInstance.createToken(options, function (err, response) {
