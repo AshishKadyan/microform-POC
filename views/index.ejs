@@ -103,7 +103,9 @@
         var expYear = document.querySelector('#expYear');
         var firstName = document.querySelector('#firstName');
         var lastName = document.querySelector('#lastName');
-        var amount = document.querySelector('#amount');
+        var amount = document.querySelector('#amount')
+        var cardholderName = document.querySelector('#cardholderName');
+        cardholderName.value="John Doe"
         amount.value=10;
         firstName.value="John"
         lastName.value="Doe"
@@ -151,6 +153,7 @@
 
                 // intercept the form submission and make a tokenize request instead
                 payButton.addEventListener('click', function () {
+                    debugger
 
                     // Send in optional parameters from other parts of your payment form
                     var options = {
