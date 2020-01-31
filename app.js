@@ -76,7 +76,7 @@ app.get('/checkout', function (req, res) {
 
                 var request = new cybersourceRestApi.GeneratePublicKeyRequest();
                 request.encryptionType = 'RsaOaep256';
-                // request.targetOrigin = 'http://localhost:3000';
+                request.targetOrigin = window.location.origin;
 
                 var options = {
                         'generatePublicKeyRequest': request
