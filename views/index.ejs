@@ -14,6 +14,14 @@
             background-color: #f5f5f5;
         }
 
+        .amount {
+            min-height: 80px;
+            background-color: #EDF9EC;
+        }
+        .amount .detail {
+            font-size: 22px;
+        }
+
         .lock-icon {
             top: -3px;
             position: relative;
@@ -116,10 +124,7 @@
                     <label for="email">Email</label>
                     <input id="email" class="form-control required" name="email" placeholder="Enter Email">
                 </div>
-                <div class="form-group">
-                    <label for="amount">Amount</label>
-                    <input id="amount" class="form-control required" name="amount" placeholder="Enter Amount">
-                </div>
+                <input type="hidden" id="amount" class="form-control required" name="amount" placeholder="Enter Amount">
                 <h2>Payment Details
                     <img class="lock-icon" src="assets/lock.jpg" alt="lock"></h2>
                 <div class="form-group">
@@ -163,7 +168,12 @@
                         </select>
                     </div> -->
                 </div>
-                <button type="button" id="pay-button" class="btn btn-primary">Pay</button>
+                <h2>Your Order</h2>
+                <div class="amount d-flex justify-content-between align-items-center p-4  mt-3">
+                    <span>Total Amount</span>
+                    <span class="detail">&#163; 2.5</span>
+                </div>
+                <button type="button" id="pay-button" class="btn btn-primary mt-4">Pay</button>
                 <!-- <input type="hidden" id="tokenizedCard" name="tokenizedCard"> -->
                 <input type="hidden" id="flexresponse" name="flexresponse">
             </form>
@@ -193,7 +203,7 @@
         debugger
         var cardholderName = document.querySelector('#cardholderName');
         cardholderName.value = "John Doe"
-        amount.value = 10;
+        amount.value = 2.5;
         firstName.value = "John"
         lastName.value = "Doe"
         address1.value = "House Number 2"
