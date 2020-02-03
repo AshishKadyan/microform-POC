@@ -221,16 +221,16 @@ function processPayment(callback, enableCapture, data , tokenizedCard) {
                 amountDetails.currency = 'USD';
 
                 var billTo = new cybersourceRestApi.Ptsv2paymentsOrderInformationBillTo();
-                billTo.country = 'US';
+                billTo.country = data.country;
                 billTo.firstName = data.firstName;
                 billTo.lastName = data.lastName;
                 billTo.phoneNumber = '4158880000';
-                billTo.address1 = 'test';
+                billTo.address1 = data.address1;
                 billTo.postalCode = '94105';
-                billTo.locality = 'San Francisco';
+                billTo.locality = data.city;
                 billTo.administrativeArea = 'MI';
-                billTo.email = 'ashish.kadyan@comprotechnologies.com';
-                billTo.address2 = 'Address 2';
+                billTo.email = data.email;
+                billTo.address2 = data.address2;
                 billTo.district = 'MI';
                 billTo.buildingNumber = '123';
                 billTo.company = 'Visa';

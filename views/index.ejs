@@ -7,10 +7,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css"
         integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <style>
         #cardNumber-container {
             height: 38px;
             background-color: #f5f5f5;
+        }
+
+        .lock-icon {
+            top: -3px;
+            position: relative;
         }
 
         .container {
@@ -25,24 +31,25 @@
         }
 
         .form-control {
-            background-color: #f5f5f5;
+            background-color: #f9f9f9;
+            font-size: 14px;
+            height: 36px;
 
         }
 
         h2 {
             color: #323232;
             font-size: 21px;
-            font-weight: 700;
+            font-weight: 500;
             line-height: 32px;
-            text-align: center;
+            border-bottom: 1px solid grey;
+            padding-bottom: 8px;
         }
 
         label {
             display: inline-block;
-            font-size: 12px;
-            color: #696969;
+            font-size: 16px;
             font-weight: 600;
-            line-height: 16px;
             font-family: 'muli'
         }
 
@@ -58,22 +65,13 @@
         }
 
         .btn {
-            cursor: pointer;
-            -ms-flex-line-pack: center;
-            align-content: center;
-            text-align: center;
-            width: auto;
-            padding: 12px 30px;
-            border-radius: 24px;
-            background-color: #8723FF;
-            box-shadow: 0 2px 16px -6px rgba(0, 0, 0, 0.25);
-            color: #ffffff;
-            font-size: 14px;
-            font-weight: 700;
-            letter-spacing: 0.55px;
-            height: auto;
-            margin: auto;
-            display: block;
+            float: right;
+            min-width: 100px;
+            background-color: green;
+        }
+
+        label:after {
+            content: "*";
         }
     </style>
 </head>
@@ -81,22 +79,62 @@
 <body>
     <div class="container card">
         <div class="card-body">
-            <h2>Card Details</h2>
             <form action="/pay" id="my-sample-form" method="post">
+
+                <h2>Billing Information</h2>
+                <div class='d-flex justify-content-end'>
+                    <div style="float: right">*Required Field</div>
+                </div>
+
+                <div class="form-group">
+                    <label for="firstName">First Name</label>
+                    <input id="firstName" class="form-control required" name="firstName" placeholder="Enter First Name">
+                </div>
+                <div class="form-group">
+                    <label for="lastName">Surname</label>
+                    <input id="lastName" class="form-control required" name="lastName" placeholder="Enter Last Name">
+                </div>
+                <div class="form-group">
+                    <label for="address">Address</label>
+                    <input id="address1" class="form-control required" name="address1" placeholder="">
+                    <input id="address2" class="form-control mt-2 required" name="address2" placeholder="">
+                </div>
+                <div class="form-group">
+                    <label for="city">Town/City</label>
+                    <input id="city" class="form-control required" name="city" placeholder="Enter Town/City">
+                </div>
+                <div class="form-group">
+                    <label for="country">Country/Region</label>
+                    <input id="country" class="form-control required" name="country" placeholder="Enter Country/Region">
+                </div>
+                <div class="form-group">
+                    <label for="postalCode">Postal Code</label>
+                    <input id="postalCode" class="form-control required" name="postalCode"
+                        placeholder="Enter Postal Code">
+                </div>
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input id="email" class="form-control required" name="email" placeholder="Enter Email">
+                </div>
+                <div class="form-group">
+                    <label for="amount">Amount</label>
+                    <input id="amount" class="form-control required" name="amount" placeholder="Enter Amount">
+                </div>
+                <h2>Payment Details
+                    <img class="lock-icon" src="assets/lock.jpg" alt="lock"></h2>
                 <div class="form-group">
                     <label for="cardholderName">Name</label>
-                    <input id="cardholderName" class="form-control" name="cardholderName"
+                    <input id="cardholderName" class="form-control required" name="cardholderName"
                         placeholder="Name on the card">
                 </div>
                 <div class="form-group">
                     <label id="cardNumber-label">Card Number</label>
-                    <div id="cardNumber-container" class="form-control"></div>
+                    <div id="cardNumber-container" class="form-control required"></div>
                 </div>
-
-                <div class="form-row">
-                    <div class="form-group col-md-6">
-                        <label for="expMonth">Expiry month</label>
-                        <select id="expMonth" class="form-control">
+                <div class="form-group">
+                    <label for="expMonth">Expiry date</label>
+                    <div class="d-flex flex-row">
+                        <select id="expMonth" class="form-control col-3 col-md-2">
                             <option>01</option>
                             <option>02</option>
                             <option>03</option>
@@ -110,10 +148,7 @@
                             <option>11</option>
                             <option>12</option>
                         </select>
-                    </div>
-                    <div class="form-group col-md-6">
-                        <label for="expYear">Expiry year</label>
-                        <select id="expYear" class="form-control">
+                        <select id="expYear" class="form-control ml-2 col-4 col-md-3">
                             <option>2021</option>
                             <option>2022</option>
                             <option>2023</option>
@@ -128,21 +163,8 @@
                         </select>
                     </div> -->
                 </div>
-                <h2>Billing Info</h2>
-                <div class="form-group">
-                    <label for="amount">Amount</label>
-                    <input id="amount" class="form-control" name="amount" placeholder="Enter Amount">
-                </div>
-                <div class="form-group">
-                    <label for="firstName">First Name</label>
-                    <input id="firstName" class="form-control" name="firstName" placeholder="Enter First Name">
-                </div>
-                <div class="form-group">
-                    <label for="lastName">Last Name</label>
-                    <input id="lastName" class="form-control" name="lastName" placeholder="Enter Last Name">
-                </div>
                 <button type="button" id="pay-button" class="btn btn-primary">Pay</button>
-                <input type="hidden" id="tokenizedCard" name="tokenizedCard">
+                <!-- <input type="hidden" id="tokenizedCard" name="tokenizedCard"> -->
                 <input type="hidden" id="flexresponse" name="flexresponse">
             </form>
         </div>
@@ -161,14 +183,27 @@
         var firstName = document.querySelector('#firstName');
         var lastName = document.querySelector('#lastName');
         var amount = document.querySelector('#amount')
+        var address1 = document.querySelector('#address1')
+        var address2 = document.querySelector('#address2')
+        var country = document.querySelector('#country')
+        var postalCode = document.querySelector('#postalCode')
+        var city = document.querySelector('#city')
+
+        var email = document.querySelector('#email')
+        debugger
         var cardholderName = document.querySelector('#cardholderName');
         cardholderName.value = "John Doe"
         amount.value = 10;
         firstName.value = "John"
         lastName.value = "Doe"
+        address1.value = "House Number 2"
+        address2.value = "Street 5"
+        country.value = "US"
+        postalCode.value = "123456"
+        city.value = "New York"
+        email.value = "abc@gmail.com"
         // var cardType = document.querySelector('#cardType'); 
-
-        var jwk =  <%-keyInfo%> ;
+        var jwk = <%-keyInfo%> ;
         console.log(JSON.stringify(jwk));
 
 
@@ -183,9 +218,9 @@
                 styles: {
                     'input': {
                         'font-family': '-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol"',
-                        'font-size': '1rem',
+                        'font-size': '16px',
+                        'height': "36px",
                         'line-height': '1.5',
-                        'color': '#495057',
                     },
                     ':focus': {
                         'color': 'blue'
